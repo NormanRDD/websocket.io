@@ -1,3 +1,10 @@
+Данный проект содержит симуляцию и наброски для дальнейшей возможной эксплуатаций WebSocket технологии.
+
+проект запускается командой npm run dev.
+
+server.js - файл в котором развернут локальный сервер на фреймворке express. Так же в нем присутствует обход ошибок CORS. для запуска сервера, проваливаем в директорию с файлом , и пишем node server.js.
+
+
 # firstProject
 
 This template should help get you started developing with Vue 3 in Vite.
