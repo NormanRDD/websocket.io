@@ -5,16 +5,17 @@ import axios from 'axios'
 import {io} from 'socket.io-client'
 
 
-const socket = io('http://localhost:8080/', {});
+const socket = io('http://localhost:3000/', {});
 
 const message = ref('');
+const messages = ref([]);
 
 socket.on('message', (msg) => {
-  console.log(msg);
+  messages.value = [...messages.value, msg]
 })
 
 const submit = async () => {
-  await axios.post('http://localhost:8000/api/message', {
+  await axios.post('http://localhost:3000/api/message', {
     message: message.value
   })
 
@@ -40,17 +41,17 @@ const submit = async () => {
           <strong class="mb-1">Rick Grimes, Norman Reedus</strong>
         </div>
         <div id="conversation">
-          <div class="row pt-2">
+          <div class="row pt-2" v-for="msg of messages">
             <div class="col-6">
               <div class="alert alert-success d-inline-block" role="alert">
-                Hi
+                {{ msg }}
               </div>
             </div>
             <div>
               <div class="col-6"></div>
             </div>
           </div>
-          <div class="row pt-2">
+          <!-- <div class="row pt-2">
             <div class="col-6"></div>
 
             <div class="col-6">
@@ -60,7 +61,7 @@ const submit = async () => {
             </div>
             <div>
             </div>
-          </div>
+          </div> -->
         </div>
         <form id="reply" class="p-3 w-100" @submit.prevent="submit">
           <div class="inpu-group">
